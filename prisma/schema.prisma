@@ -15,10 +15,34 @@ datasource db {
 
 model Customer {
   id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  cnpj      String?  @db.VarChar(20)
+  cpf       String?  @db.VarChar(20)
+  typeAccount  TypeAccount
+  cellPhone String?  @db.VarChar(20)
+  phone     String?  @db.VarChar(20)
+  email     String   @db.VarChar(255)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  cnpj      String?  @db.VarChar(255)
-  cpf       String?  @db.VarChar(20)
-  typeSign  String  @db.VarChar(255) // tentar colocar  enum
-  published Boolean  @default(false)
+  Adress Adress[]
+}
+
+model Adress{
+  id        Int      @id @default(autoincrement())
+    cep     String  @db.VarChar(255)
+  street    String   @db.VarChar(255)
+  number    String   @db.VarChar(20)
+  complement String? @db.VarChar(255)
+  neighborhood String @db.VarChar(255)
+  city      String @db.VarChar(255)
+  state     String @db.VarChar(2)
+  customer  Customer @relation(fields: [customerId], references: [id])
+  customerId Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum TypeAccount {
+  PJ
+  PF
 }

@@ -6,7 +6,9 @@
     "license": "MIT",
     "scripts": {
         "start": "ts-node-dev --files -r tsconfig-paths/register --inspect --ignore-watch node_modules src/index.ts",
-        "prisma:migrate": "npx prisma migrate dev --name init"
+        "teste_script":"npm i && npm run prisma:deploy && npm run start",
+        "prisma:migrate": "npx prisma migrate dev --name init",
+        "prisma:deploy": "npx prisma migrate deploy"
     },
     "dependencies": {
         "@prisma/client": "^5.21.0",
