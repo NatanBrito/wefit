@@ -1,20 +1,3 @@
-// import express from "express";
-// import { getCustomer } from "./services/customer";
-
-// const app = express();
-
-// const port = process.env.PORT_BACK || 4568;
-
-// app.get("/ping", async (req, res) => {
-//   const miau= await getCustomer()
-//   return res.send(miau);
-// });
-
-// app.listen(port, () => {
-//   console.log(`Escutando na porta ${port}`);
-// });
-
-
 import express, { json } from "express";
 import cors from "cors";
 import customer from "./routes/customer.routes";
