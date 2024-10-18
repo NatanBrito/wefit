@@ -24,12 +24,12 @@ model Customer {
   email     String   @db.VarChar(255)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  Adress Adress[]
+  Address Address[]
 }
 
-model Adress{
+model Address{
   id        Int      @id @default(autoincrement())
-    cep     String  @db.VarChar(255)
+  zipCode     String  @db.VarChar(255)
   street    String   @db.VarChar(255)
   number    String   @db.VarChar(20)
   complement String? @db.VarChar(255)
