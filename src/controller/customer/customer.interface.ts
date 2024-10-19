@@ -1,29 +1,23 @@
 
 import { z } from 'zod';
-import { IValidateAddress } from '../address/address.interface';
+import { IAddress, IValidateAddress } from '../address/address.interface';
+
+interface ICustomerWithAddress {
+    Customer: ICustomer
+    Address?: IAddress
+}
 
 interface ICustomer {
-    id: String;
-    name: String;
-    cnpj: String;
-    cpf: String;
-    typeAccount: String;
-    cellPhone: String;
-    phone?: String;
-    email: String;
-    address?: {
-        zipCode: String;
-        street: String;
-        number: String;
-        neighborhood: String;
-        complement: String;
-        city: String;
-        state: String;
-    };
+    name: string;
+    cnpj: string;
+    cpf: string;
+    typeAccount: 'PF' | 'PJ';
+    cellPhone: string;
+    phone?: string;
+    email: string;
 }
 
 const IValidateCustomer = z.object({
-    id: z.string(),
     name: z.string().min(1).max(255).trim(),
     cnpj: z.string().min(14).max(20).trim(),
     cpf: z.string().min(11).max(11).trim(),
@@ -31,7 +25,13 @@ const IValidateCustomer = z.object({
     cellPhone: z.string().min(11).max(11).trim(),
     phone: z.string().max(15).trim(),
     email: z.string().email(),
-    address: IValidateAddress
 });
 
-export { ICustomer, IValidateCustomer };
+const IValidateCustomerWithAddress = z.object({
+    Customer: IValidateCustomer,
+    Address: IValidateAddress
+});
+
+
+
+export { ICustomer, IValidateCustomer, ICustomerWithAddress, IValidateCustomerWithAddress };

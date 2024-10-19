@@ -1,6 +1,10 @@
+import dotenv from "dotenv";
 import express, { json } from "express";
 import cors from "cors";
+
 import customer from "./routes/customer.routes";
+
+dotenv.config();
 
 const app = express();
 
@@ -10,7 +14,6 @@ app.use(customer);
 
 export default app;
 
-//#TODO PRECISA COLOCAR A LIB PARA RENDERIZAR O ENV
 //#TODO RODAR O COMANDO DE PRETTIER
 //#TODO TESTES UNITARIOS E DE INTEGRAÇÃO
 //#TODO INSTALAÇÃO DAS LIBS DE TESTES E DE VALIDAÇÃO
