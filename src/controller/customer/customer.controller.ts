@@ -1,9 +1,10 @@
 import { Request, Response } from "express";
 import { Customer } from "@prisma/client";
 
-import CustomerService from "../../services/customer";
+import CustomerService from "../../services/customer.service";
 import { ICustomer, IValidateCustomer } from "./customer.interface";
 import { IAddress, IValidateAddress } from "../address/address.interface";
+import AlreadyExistError from "../../error/alreadyExist.error";
 
 export async function createCustomer(req: Request, res: Response): Promise<void> {
   try {
@@ -13,12 +14,22 @@ export async function createCustomer(req: Request, res: Response): Promise<void>
 
     const customer: ICustomer = IValidateCustomer.parse(dataCustomer);
     const address: IAddress = IValidateAddress.parse(dataAddress);
-    // const test = { ...customer, Address: address }
-    const response = await CustomerService.create(customer);
-    res.status(200).send({ response });
+
+    const hasCustomer = await CustomerService.findCustomer({ cpf: customer.cpf, cnpj: customer.cnpj });
+    if (!hasCustomer) {
+      throw new AlreadyExistError(`Customer:${customer.name} already exist`);
+    }
+    const newCustomer = await CustomerService.create(customer);
+    // const newAddress = await CustomerService.createAddress(newCustomer.id, address);
+
+    res.status(200).send({ customer: newCustomer, address: "newAddress" });
+
   } catch (err) {
-    console.error(err);
-    res.status(400).send({ error: err, message: "Error to create customer" });
+    if (err instanceof AlreadyExistError) {
+      res.status(err.statusCode).send({ error: err, message: err.message });
+      return
+    }
+    res.status(500).send({ error: err, message: "Error to create customer" });
   }
 }
 
