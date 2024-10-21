@@ -10,7 +10,6 @@ export class AddressRepository {
 
     }
 
-
     async create(data: Prisma.AddressCreateInput) {
         return this.orm.address.create({ data });
     }

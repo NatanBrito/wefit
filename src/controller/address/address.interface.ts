@@ -2,13 +2,13 @@ import { z } from 'zod';
 
 
 interface IAddress {
-    zipCode: String,
-    street: String,
-    number: String,
-    neighborhood: String,
-    complement: String,
-    city: String,
-    state: String
+    zipCode: string,
+    street: string,
+    number: string,
+    neighborhood: string,
+    complement: string,
+    city: string,
+    state: string
 }
 
 const IValidateAddress = z.object({
