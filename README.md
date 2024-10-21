@@ -1,71 +1,72 @@
 ## Backend - Wefit
 
-Seja bem vindo ao teste de backend da Wefit.
-
-### Para iniciar o banco de dados é necessario ter o docker-compose instalado em sua máquina e rodar o seguinte comando:
+### Para iniciar a aplicação é necessario ter o docker-compose instalado em sua máquina e rodar o seguinte comando:
 
     docker-compose up -D
 
-o docker-compose vai criar um container de um MySQL e você poderá acessar via localhost:3306 e a senha do usuário **root** é **senha_root_123**
+o docker-compose vai criar um container de um banco de dados MySQL e iniciar o backend em Node. Você poderá acessar via localhost:5000.
 
-### Para iniciar o servidor express basta executar o seguinte comando:
+O banco de dados vai estar disponivel somente dentro do compose
 
-    npm start
-    ou
-    yarn start
+## Endpoints
 
-Depois que concluir seu teste não de enviar o seu código junto a pasta data, nela está salvo o volume do MySQL criado pelo docker.
+### 1. Para ver todos os clientes registrados (GET)
 
-Boa sorte =)
+- **URL**: `http://localhost:5000/customer`
+- **Método**: `GET`
 
-# wefit
+### 2. Criar um novo cliente (POST)
 
-# Documentação da API de Cadastro de vendedor ou comprador
-
-**_Exemplo de JSON de Entrada_**
-
-O formato esperado para o cadastro de um cliente e seu respectivo endereço é o seguinte:
-
-```json
-{
-  "Customer": {
-    "name": "john doe",
-    "cnpj": "67227997000198",
-    "cpf": "38121249040",
-    "typeAccount": "PF",
-    "cellPhone": "21925439699",
-    "phone": "41999995555",
-    "email": "natan_example@gmail.com"
-  },
-  "Address": {
-    "zipCode": "8383833",
-    "street": "Rua exemplo",
-    "number": "134",
-    "neighborhood": "Batel",
-    "complement": "perto de um mercado",
-    "city": "Curitiba",
-    "state": "PR"
+- **URL**: `http://localhost:5000/customer`
+- **Método**: `POST`
+- **Body**:
+  ```json
+  {
+    "Customer": {
+      "name": "john doe",
+      "cnpj": "57227997060198",
+      "cpf": "38141249044",
+      "typeAccount": "PF",
+      "cellPhone": "21925479699",
+      "phone": "41999995553",
+      "email": "natan_exmple@gmail.com"
+    },
+    "Address": {
+      "zipCode": "8383833",
+      "street": "Rua exemplo",
+      "number": "134",
+      "neighborhood": "Batel",
+      "complement": "perto de um mercado",
+      "city": "Curitiba",
+      "state": "PR"
+    }
   }
+  ```
+
+## Curl para inserção de vendedor ou comprador
+
+curl -X POST \
+ 'http://localhost:5000/customer' \
+ --header 'Accept: _/_' \
+ --header 'Content-Type: application/json' \
+ --data-raw '{
+"Customer":{
+"name": "john doe",
+"cnpj": "57227997060198",
+"cpf": "38141249044",
+"typeAccount": "PF",
+"cellPhone": "21925479699",
+"phone": "41999995553",
+"email": "natan_exmple@gmail.com"
+},
+"Address": {
+"zipCode": "8383833",
+"street": "Rua exemplo",
+"number": "134",
+"neighborhood": "Batel",
+"complement": "perto de um mercado",
+"city": "Curitiba",
+"state": "PR"
 }
-```
-
-### Campos esperados:
-
-- **Customer**: Objeto que contém os detalhes do cliente.
-  - `name`: Nome do cliente (string).
-  - `cnpj`: CNPJ do cliente, caso aplicável (string).
-  - `cpf`: CPF do cliente, caso aplicável (string).
-  - `typeAccount`: Tipo de conta, "PF" para pessoa física ou "PJ" para pessoa jurídica (enum).
-  - `cellPhone`: Número de celular (string).
-  - `phone`: Número de telefone fixo (string).
-  - `email`: E-mail (string).
-- **Address**: Objeto com os detalhes do endereço do cliente.
-  - `zipCode`: Código postal (string).
-  - `street`: Nome da rua (string).
-  - `number`: Número da residência (string).
-  - `neighborhood`: Bairro (string).
-  - `complement`: Complemento do endereço (string, opcional).
-  - `city`: Cidade (string).
-  - `state`: Estado (ENUM ['PF','PJ']).
-
-##
+}
+'
