@@ -14,16 +14,15 @@ services:
     volumes:
       - ./data/:/var/lib/mysql
 
-  # backend:
-  #   image: node:20-alpine
-  #   platform: linux/x86_64
-  #   working_dir: /app
-  #   # restart: unless-stopped
-  #   env_file: ./.env
-  #   ports:
-  #     - $PORT_BACK:$PORT_BACK
-  #   depends_on:
-  #     - mysqldb
-  #   volumes:
-  #     - ./:/app
-  #   command: $START_BACK
+  backend:
+    image: node:20-alpine
+    working_dir: /app
+    restart: unless-stopped
+    env_file: ./.env
+    ports:
+      - $PORT_BACK:$PORT_BACK
+    depends_on:
+      - mysqldb
+    volumes:
+      - ./:/app
+    command: $COMMAND_START_BACK

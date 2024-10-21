@@ -6,7 +6,7 @@
     "license": "MIT",
     "scripts": {
         "start": "ts-node-dev --files -r tsconfig-paths/register --inspect --ignore-watch node_modules src/server.ts",
-        "teste_script": "npm i && npm run prisma:deploy && npm run start",
+        "start:docker": "npm i && npm run prisma:migrate &&  npm run start",
         "prisma:migrate": "npx prisma migrate dev --name init",
         "prisma:deploy": "npx prisma migrate deploy",
         "prettier:format": "prettier --write \"src/**/*.{ts,js}\""
