@@ -12,7 +12,11 @@ export class CustomerRepository {
   }
 
   async findMany() {
-    return this.orm.customer.findMany();
+    return this.orm.customer.findMany(({
+      include: {
+        Address: true,
+      },
+    }));
   }
 
   async findOne(dataSearch: CustomerWhereInput) {

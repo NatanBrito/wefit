@@ -15,9 +15,11 @@ export async function createCustomer(req: Request, res: Response): Promise<void>
     const customer: ICustomer = IValidateCustomer.parse(dataCustomer);
     const address: IAddress = IValidateAddress.parse(dataAddress);
 
-    const hasCustomer = await CustomerService.findCustomer({ cpf: customer.cpf, cnpj: customer.cnpj });
+    const validateHasUnique = { cpf: customer.cpf, cnpj: customer.cnpj }
+    const hasCustomer = await CustomerService.findCustomer(validateHasUnique);
     if (hasCustomer) {
-      throw new AlreadyExistError(`Customer: ${customer.name} already exist`);
+      const message = `Customer: ${customer.name}, already exist, verify this fields: [${Object.keys(validateHasUnique)}]`
+      throw new AlreadyExistError(message);
     }
 
     const newCustomer: Customer = await CustomerService.create(customer);
