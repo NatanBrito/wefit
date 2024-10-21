@@ -8,7 +8,8 @@
         "start": "ts-node-dev --files -r tsconfig-paths/register --inspect --ignore-watch node_modules src/server.ts",
         "teste_script": "npm i && npm run prisma:deploy && npm run start",
         "prisma:migrate": "npx prisma migrate dev --name init",
-        "prisma:deploy": "npx prisma migrate deploy"
+        "prisma:deploy": "npx prisma migrate deploy",
+        "prettier:format": "prettier --write \"src/**/*.{ts,js}\""
     },
     "dependencies": {
         "@prisma/client": "^5.21.0",
@@ -25,6 +26,7 @@
         "eslint": "^9.12.0",
         "eslist": "^1.0.0-beta.1",
         "globals": "^15.11.0",
+        "prettier": "^3.3.3",
         "prisma": "^5.21.0",
         "ts-node-dev": "^1.1.8",
         "tsconfig-paths": "^3.12.0",

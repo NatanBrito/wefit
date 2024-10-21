@@ -1,11 +1,11 @@
-import { Request, Response } from "express";
-import { Customer } from "@prisma/client";
+import { Request, Response } from 'express';
+import { Customer } from '@prisma/client';
 
-import { ICustomer, IValidateCustomer } from "./customer.interface";
-import { IAddress, IValidateAddress } from "../address/address.interface";
-import CustomerService from "../../services/customer.service";
-import addressService from "../../services/address.service";
-import AlreadyExistError from "../../error/alreadyExist.error";
+import { ICustomer, IValidateCustomer } from './customer.interface';
+import { IAddress, IValidateAddress } from '../address/address.interface';
+import CustomerService from '../../services/customer.service';
+import addressService from '../../services/address.service';
+import AlreadyExistError from '../../error/alreadyExist.error';
 
 export async function createCustomer(req: Request, res: Response): Promise<void> {
   try {
@@ -24,14 +24,13 @@ export async function createCustomer(req: Request, res: Response): Promise<void>
     const newAddress = await addressService.create(address, newCustomer.id);
 
     res.status(200).send({ customer: newCustomer, address: newAddress });
-
   } catch (err) {
     if (err instanceof AlreadyExistError) {
       res.status(err.statusCode).send({ error: err, message: err.message });
-      return
+      return;
     }
 
-    res.status(500).send({ error: err, message: "Error to create customer" });
+    res.status(500).send({ error: err, message: 'Error to create customer' });
   }
 }
 

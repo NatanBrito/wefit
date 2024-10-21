@@ -1,26 +1,26 @@
-import { Address } from "@prisma/client";
+import { Address } from '@prisma/client';
 
-import { AddressRepository } from "../repository/address.repository";
-import { IAddress } from "../controller/address/address.interface";
+import { AddressRepository } from '../repository/address.repository';
+import { IAddress } from '../controller/address/address.interface';
 
 class CustomerService {
-    private addressRepository;
-    constructor() {
-        this.addressRepository = new AddressRepository()
-    }
+  private addressRepository;
+  constructor() {
+    this.addressRepository = new AddressRepository();
+  }
 
-    async create(address: IAddress, customerId: number): Promise<Address> {
-        const dataAddress = { customer: { connect: { id: customerId } }, ...address }
+  async create(address: IAddress, customerId: number): Promise<Address> {
+    const dataAddress = { customer: { connect: { id: customerId } }, ...address };
 
-        return this.addressRepository.create(dataAddress);
-    }
+    return this.addressRepository.create(dataAddress);
+  }
 
-    async get(): Promise<Address[]> {
-        return this.addressRepository.findMany()
-    }
+  async get(): Promise<Address[]> {
+    return this.addressRepository.findMany();
+  }
 
-    async findCustomer(data: Object): Promise<Address | null> {
-        return this.addressRepository.findOne(data)
-    }
+  async findCustomer(data: Object): Promise<Address | null> {
+    return this.addressRepository.findOne(data);
+  }
 }
 export default new CustomerService();

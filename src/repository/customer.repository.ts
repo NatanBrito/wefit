@@ -1,7 +1,6 @@
-import { Prisma, PrismaClient } from "@prisma/client";
+import { Prisma, PrismaClient } from '@prisma/client';
 
 type CustomerWhereInput = Prisma.CustomerWhereInput;
-
 
 export class CustomerRepository {
   private orm;
@@ -18,7 +17,7 @@ export class CustomerRepository {
 
   async findOne(dataSearch: CustomerWhereInput) {
     return this.orm.customer.findFirst({
-      where: dataSearch
+      where: dataSearch,
     });
   }
 }

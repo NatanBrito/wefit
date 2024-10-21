@@ -19,4 +19,4 @@ export const validateInterface =
     next();
   };
 
-  export default validateInterface;
+export default validateInterface;
