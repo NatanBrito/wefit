@@ -15,7 +15,7 @@ model Customer {
   cpf       String?  @db.VarChar(20) @unique 
   typeAccount  TypeAccount
   cellPhone String?  @db.VarChar(20) @unique 
-  phone     String?  @db.VarChar(20) @unique 
+  phone     String?  @db.VarChar(20) 
   email     String   @db.VarChar(80) @unique 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

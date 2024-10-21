@@ -19,9 +19,9 @@ export async function createCustomer(req: Request, res: Response): Promise<void>
       cpf: customer.cpf,
       cnpj: customer.cnpj,
       email: customer.email,
-      phone: customer.phone,
       cellPhone: customer.cellPhone,
     };
+
     const hasCustomer = await CustomerService.findCustomer(validateHasUnique);
 
     if (hasCustomer) {
@@ -34,6 +34,8 @@ export async function createCustomer(req: Request, res: Response): Promise<void>
 
     res.status(200).send({ customer: newCustomer, address: newAddress });
   } catch (err) {
+    console.error(err);
+
     if (err instanceof AlreadyExistError) {
       res.status(err.statusCode).send({ error: err, message: err.message });
       return;
