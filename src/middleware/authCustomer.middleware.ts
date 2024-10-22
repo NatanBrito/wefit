@@ -1,7 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 
 const authCustomer = async (req: Request, res: Response, next: NextFunction) => {
-  console.log('User is authenticated');
+  // Entraria validação JWT
+  console.log('\n User is authenticated');
   next();
 };
 
