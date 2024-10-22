@@ -1,5 +1,8 @@
 ## Backend - Wefit
 
+- Não foi adicionada validação JWT para facilidade de teste
+- Alguns campos no forms foram feitos com obrigatoriedade de unicidade [cellPhone, email, cnpj, cpf]
+
 ### Para iniciar a aplicação é necessario ter o docker-compose instalado em sua máquina e rodar o seguinte comando:
 
     docker-compose up -D
