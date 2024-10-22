@@ -25,7 +25,7 @@ export async function createCustomer(req: Request, res: Response): Promise<void>
     const hasCustomer = await CustomerService.findCustomer(validateHasUnique);
 
     if (hasCustomer) {
-      const message = `Customer: ${customer.name}, already exist, verify this fields: [${Object.keys(validateHasUnique)}], he has unique value`;
+      const message = `Customer: ${customer.name}, already exist, verify this fields: [${Object.keys(validateHasUnique)}], They has unique value`;
       throw new AlreadyExistError(message);
     }
 

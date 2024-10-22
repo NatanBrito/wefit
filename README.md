@@ -10,7 +10,7 @@ O banco de dados vai estar disponivel somente dentro do compose
 
 ## Endpoints
 
-### 1. Para ver todos os clientes registrados (GET)
+### 1. Para ver todos os clientes registrados e seus endereços (GET)
 
 - **URL**: `http://localhost:5000/customer`
 - **Método**: `GET`
